@@ -1,68 +1,117 @@
-# Lens Holiday Hackathon
+# ShreyasBot  
+  
+ShreyasBot is an autonomous AI agent designed to manage and interact with the Lens Network on behalf of Shreyas Papinwar. It periodically fetches posts from the Lens Network, stores them, and performs relevance-aware generation (RAG) searches to reply to posts or create new posts. The bot encapsulates Shreyas's personal journey, including his experiences, hackathon wins, college events, travel history, and educational background.  
+  
+## Key Features  
+- **Autonomous Interaction:** Automatically replies to posts or generates new content on the Lens Network.  
+- **Periodic Data Fetching:** Periodically fetches posts from the Lens Network.  
+- **RAG Search:** Uses relevance-aware generation search to find relevant posts.  
+- **Personalized Responses:** Generates responses based on Shreyas's personal data and experiences.  
+  
+## Project Architecture  
+  
+### 1. Data Collection  
+- **Fetch Posts:** Periodically fetch all the posts from the Lens Network using the Lens API.  
+- **API Integration:** Use the [Lens API](https://dev-preview.lens.xyz/docs/getting-started) to gather posts and interactions.  
+  
+### 2. Data Storage  
+- **Database:** Store the fetched posts in a NoSQL (MongoDB).  
+- **Data Schema:** Design a schema to store the post content, metadata (author, timestamp, etc.), and related tags for RAG searches.  
+  
+### 3. Relevance-Aware Generation (RAG) Search  
+- **RAG Search:** Implement RAG search to identify relevant posts where the bot can reply or generate new content.  
+- **Embedding & Indexing:** Use embeddings to index posts and facilitate quick and accurate search results.  
+  
+### 4. AI Agent  
+- **Model Training:** Train a custom language model fine-tuned on Shreyas's personal data, including his journey, achievements, and experiences.  
+- **Response Generation:** The AI agent generates responses or new posts based on the context of the fetched posts and Shreyas's persona.  
+  
+### 5. Interaction with Lens Network  
+- **Automated Posting:** Automate the posting of replies or new content on the Lens Network using the Lens API.  
+- **Monitoring & Logging:** Monitor interactions and log activities for transparency and further improvements.  
+  
+### 6. Periodic Tasks  
+- **Cron Jobs:** Set up cron jobs to periodically fetch new posts and perform RAG searches to keep the bot active and updated.  
+  
+## Diagrams and Graphs  
+  
+### Architecture Diagram  
+  
+```mermaid  
+graph TD  
+    A[Fetch Posts] --> B[API Integration]  
+    B --> C[Data Storage]  
+    C --> D[RAG Search]  
+    D --> E[AI Agent]  
+    E --> F[Automated Posting]  
+    E --> G[Monitoring & Logging]  
+    C --> H[Embedding & Indexing]  
+    A --> I[Cron Jobs]
+```
 
-The Lens Holiday Hackathon is an opportunity to build innovative projects on Lens Network, compete for prizes, and showcase your work to the Lens community.
+### Data Flow Diagram
 
-### Key Dates
+```mermaid
+graph LR  
+    A[Posts from Lens Network] --> B[Data Collection]  
+    B --> C[Database]  
+    C --> D[Relevance-Aware Generation Search]  
+    D --> E[AI Agent]  
+    E --> F[Responses/Posts]  
+    F --> G[Lens Network]  
+    G --> A
+```
 
-- **Kickoff:** December 16th, 2024 at 4pm CET
-- **Submission Deadline:** January 7th, 2025 at 4pm CET
-- **Voting/Judging Period:** January 8th, 2025 at 4pm CET – January 12th, 2025 at 4pm CET
+### Interaction Cycle
 
-### Tracks and Themes
+```mermaid
+sequenceDiagram  
+    participant User  
+    participant ShreyasBot  
+    participant LensNetwork  
+  
+    User->>LensNetwork: Post Content  
+    ShreyasBot->>LensNetwork: Fetch Posts  
+    LensNetwork->>ShreyasBot: Return Posts  
+    ShreyasBot->>ShreyasBot: Store Posts  
+    ShreyasBot->>ShreyasBot: RAG Search  
+    ShreyasBot->>ShreyasBot: Generate Response  
+    ShreyasBot->>LensNetwork: Post Response  
+    LensNetwork->>User: Notify Response  
+```
 
-Eligible projects must be deployed to [Lens Testnet](https://dev-preview.lens.xyz/docs), and using [Family’s Connect Kit](https://docs.family.co/connectkit) when possible. Suggested ideas:
+### Component Diagram
 
-- Social/SocialFi apps using features like Feeds, Social Graphs, etc.
-- Meme-adjacent projects
-- Public goods
-- Games
-- AI agents and products
+```mermaid
 
-### Prizes
+classDiagram  
+    class ShreyasBot {  
+        +fetchPosts()  
+        +storePosts()  
+        +ragSearch()  
+        +generateResponse()  
+        +postResponse()  
+        +monitorAndLog()  
+    }  
+      
+    class LensAPI {  
+        +getPosts()  
+        +postReply()  
+    }  
+      
+    class Database {  
+        +savePost()  
+        +retrievePosts()  
+    }  
+      
+    class AIModel {  
+        +trainModel(data)  
+        +generateReply(context)  
+    }  
+      
+    ShreyasBot --> LensAPI : Uses  
+    ShreyasBot --> Database : Stores Data  
+    ShreyasBot --> AIModel : Utilizes  
+```
 
-- **1st Prize:** 20,000 GHO
-- **2nd Prize:** 10,000 GHO
-- **3rd Prize:** 5,000 GHO
-- **Honorary Mentions (x5):** 3,000 GHO
 
-### Rules
-
-1. Build on Lens, use [ConnectKit](https://github.com/family/connectkit) where applicable. [Docs.](https://dev-preview.lens.xyz/docs/features/getting-started) [$GRASS Testnet Tokens.](https://dev-preview.lens.xyz/docs/network/tools/faucets)
-2. For troubleshooting, write to us on Telegram.
-3. The maximum number of hackers per team is 4.
-4. Submissions should be open source and built using the Lens network on Testnet. Code must be new, starting on December 16th, 2024 at 4pm CET. Any other submissions will not be considered.
-5. Submissions with commits after the deadline of January 7th, 2025 at 4pm CET will be disqualified.
-6. Teams must submit their projects for review via:
-   1. Lens Holiday Hackathon GitHub, by following [these steps](#submit-your-project).
-   2. Jokerace Entry. Submissions that are not in Jokerace won’t be able to be voted, therefore disqualified.
-7. Final submission must include:
-   1. Clear and concise README.
-   2. Prototype app.
-   3. Demo video / slide deck (you are welcomed to anonymize your voice / be camera off).
-8. Projects must adhere to the hackathon terms of service.
-
-### Submit Your Project
-
-1. **Fork and Submit a PR:**
-   - Fork the Lens Holiday Hackathon repository.
-   - Create a new Markdown (.md) file for your project submission with the format below.
-   - Commit and push your submission file to your fork repo.
-   - Submit a pull request with your project.
-
-[Here](https://jarv.is/notes/how-to-pull-request-fork-github/) is a tutorial with steps to Fork and Submit a PR.
-
-2. **PR Format:**
-   - **Project Name:**
-   - **Team Members:** (Name and Lens Handle)
-   - **Project Description:**
-   - **Source Code Link:**
-   - **Preview Link (Optional):**
-   - **Demo Video/Slide Deck Link (Optional):**
-   - **Screenshots (Optional):**
-
-### Troubleshooting:
-
-1. You can ask the community and the Lens devs questions by writing on our [Telegram](http://t.me/lensdevs).
-2. Ask in public, in the Hackathons channel. Neither devs nor the community will answer via DM.
-3. Share what you’re building with others. Building the same thing as another team? Merge teams! Anything goes as long as what you build is amazing.
-4. Be kind, respectful and patient. Some days might be slower on responses than others, as we are also on a holiday week.
