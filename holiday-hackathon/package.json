@@ -1,0 +1,12 @@
+{
+  "name": "lumen-social-media-assistant",
+  "version": "1.0.0",
+  "description": "An AI assistant for autonomously managing social media platforms.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
